@@ -7,12 +7,21 @@ import java.util.List;
 
 public class FoodDatabase {
     private static final HashMap<Integer, Food> foods = new HashMap<>();
+    private static final HashMap<Integer, Food> orders = new HashMap<>();
 
     public static Food getFoodById(int foodID)
     { return foods.get(foodID);}
 
     public static ArrayList<Food> getAllFood(){
         return new ArrayList<Food>((List) Arrays.asList(foods.values().toArray()));
+    }
+    public static ArrayList<Food> getAllOrders(){
+        return new ArrayList<Food>((List) Arrays.asList(orders.values().toArray()));
+    }
+    public static int addOrder(int id){
+        Food order = getFoodById(id);
+        orders.put(id, order);
+        return 0;
     }
     static {
         foods.put(1, new Food(

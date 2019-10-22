@@ -2,6 +2,8 @@ package com.example.homeworktask2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,14 +14,16 @@ public class FoodDescription extends AppCompatActivity {
     private TextView cost;
     private TextView calories;
     private TextView description;
-    private ImageView image;
+    private ImageView image;;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_details);
 
+        Button addCart = findViewById(R.id.addOrder);
+
         Intent intent = getIntent();
-        int foodId = intent.getIntExtra("FoodID", 0);
+        final int foodId = intent.getIntExtra("FoodID", 0);
         Food food = FoodDatabase.getFoodById(foodId);
 
         name = findViewById(R.id.detailName);
@@ -33,10 +37,17 @@ public class FoodDescription extends AppCompatActivity {
 
         name.setText(food.getName());
         description.setText(food.getDescription());
-        cost.setText(sCost);
-        calories.setText(sCalories);
+        cost.setText("$" + sCost);
+        calories.setText(sCalories + " Calories");
         image.setImageResource(food.getImageDrawableId());
 
+        addCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FoodDatabase.addOrder(foodId);
+
+            }
+        });
 
     }
 }

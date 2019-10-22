@@ -1,11 +1,17 @@
 package com.example.homeworktask2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -13,11 +19,27 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fragment fragment = new FoodRecyclerFragment();
-        swapFragment(fragment);
+        Fragment foodRecycle = new FoodRecyclerFragment();
+        final Fragment orderRecycle = new OrderFragment();
+        swapFragment(foodRecycle);
 
-        //BottomNavigationView = findViewById(R.id.navigation);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swapFragment(orderRecycle);
+            }
+        });
+
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemsSelected(@NonNull MenuItem menuItem){
+//                return true;
+//            }
+//        });
     }
+
     private void swapFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
