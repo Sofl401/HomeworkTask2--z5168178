@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class OrderFragment extends Fragment {
     private RecyclerView recyclerView;
+    private TextView totalSum;
 
     public OrderFragment() {
     }
@@ -25,10 +27,12 @@ public class OrderFragment extends Fragment {
 
         OrderAdapter orderAdapter = new OrderAdapter();
 
-        orderAdapter.setOrders(FoodDatabase.getAllOrders()); //TODO
+        orderAdapter.setOrders(FoodDatabase.getAllOrders());
         recyclerView.setAdapter(orderAdapter);
 
-        //TODO create a separate adapter for the recyclerview for each orders and food
+        totalSum = view.findViewById(R.id.finalCost);
+        String total = Double.toString(FoodDatabase.orderSum);
+        totalSum.setText(total);
         return view;
     }
 }

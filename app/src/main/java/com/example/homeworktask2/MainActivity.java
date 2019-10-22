@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,15 +20,23 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fragment foodRecycle = new FoodRecyclerFragment();
+        final Fragment foodRecycle = new FoodRecyclerFragment();
         final Fragment orderRecycle = new OrderFragment();
         swapFragment(foodRecycle);
 
         Button button = findViewById(R.id.button);
+        Button button2 = findViewById(R.id.button2);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 swapFragment(orderRecycle);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swapFragment(foodRecycle);
             }
         });
 
@@ -46,4 +55,5 @@ public class MainActivity extends AppCompatActivity{
         fragmentTransaction.replace(R.id.fragmentSlot, fragment);
         fragmentTransaction.commit();
     }
+
 }

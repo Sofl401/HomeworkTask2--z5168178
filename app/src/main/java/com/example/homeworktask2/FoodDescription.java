@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,6 +36,7 @@ public class FoodDescription extends AppCompatActivity {
         String sCost = Double.toString(food.getCost());
         String sCalories = Integer.toString(food.getCalories());
 
+        final String nameSlot = food.getName();
         name.setText(food.getName());
         description.setText(food.getDescription());
         cost.setText("$" + sCost);
@@ -45,9 +47,12 @@ public class FoodDescription extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FoodDatabase.addOrder(foodId);
-
+                showOrderAdd(nameSlot);
             }
         });
 
+}
+    public void showOrderAdd(String string) {
+        Toast.makeText(this, "You've added " + string + " to your basket!", Toast.LENGTH_SHORT).show();
     }
 }
