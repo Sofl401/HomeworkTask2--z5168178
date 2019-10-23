@@ -7,11 +7,14 @@ import java.util.List;
 
 public class FoodDatabase {
     private static final HashMap<Integer, Food> foods = new HashMap<>();
-    private static final HashMap<Integer, Food> orders = new HashMap<>();
+    public static HashMap<Integer, Food> orders = new HashMap<>();
     public static double orderSum = 0;
 
     public static Food getFoodById(int foodID)
     { return foods.get(foodID);}
+    public static Food getOrderById(int foodID){
+        return orders.get(foodID);
+    }
 
     public static ArrayList<Food> getAllFood(){
         return new ArrayList<Food>((List) Arrays.asList(foods.values().toArray()));
@@ -19,12 +22,23 @@ public class FoodDatabase {
     public static ArrayList<Food> getAllOrders(){
         return new ArrayList<Food>((List) Arrays.asList(orders.values().toArray()));
     }
-    public static void addOrder(int id){
-        Food order = getFoodById(id);
-        orderSum += order.getCost();
-        orders.put(id, order);
+    public static void addOrder(int id, Food item, int quantity){
+            double cost = item.getCost();
+            orderSum += (cost*(item.getQuantity()));
 
+            if (!orders.containsKey(id)){
+                orders.put(id, item);
+            }
+            else if (orders.containsKey(id)){
+                int pQuantity = getOrderById(id).getQuantity();
+                Food exists = getOrderById(id);
+                exists.setQuantity(pQuantity + quantity);
+            }
     }
+    public static void removeItem(int id){
+        orders.remove(id);
+    }
+
     static {
         foods.put(1, new Food(
                 1,
@@ -54,7 +68,7 @@ public class FoodDatabase {
                 4,
                 "Green Tea Ice-Cream",
                 "This Japanese green tea Ice-cream is sweet also contains a hint of our specially imported matcha. Perfect for a hot summer day. ",
-                8.95,
+                9,
                 500,
                 R.drawable.matcha
         ));

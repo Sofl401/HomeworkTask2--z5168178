@@ -7,6 +7,7 @@ public class Food {
     private double cost;
     private int calories;
     private int imageDrawableId;
+    private int quantity;
 
     public Food(int foodID, String name, String description, double cost, int calories, int imageDrawableId) {
         this.foodID = foodID;
@@ -16,6 +17,16 @@ public class Food {
         this.calories = calories;
         this.imageDrawableId = imageDrawableId;
     }
+    public Food(int foodID, String name, String description, double cost, int calories, int imageDrawableId, int quantity) {
+        this.foodID = foodID;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.calories = calories;
+        this.imageDrawableId = imageDrawableId;
+        this.quantity=quantity;
+    }
+
 
     public int getFoodID() {
         return foodID;
@@ -47,6 +58,14 @@ public class Food {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getCalories() {

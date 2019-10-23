@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import static android.view.View.VISIBLE;
+import static com.example.homeworktask2.FoodDatabase.orders;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -34,11 +39,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         final Food foodPosition = orderList.get(position);
+        final int id = foodPosition.getFoodID();
+        final int current = foodPosition.getQuantity();
 
+        holder.delete.setVisibility(VISIBLE);
         holder.name.setText(foodPosition.getName());
         String sCost = Double.toString(foodPosition.getCost());
-        holder.cost.setText(sCost);
+        holder.cost.setText("Total: $" +sCost);
         holder.itemImageView.setImageResource(foodPosition.getImageDrawableId());
+        holder.quantity.setText("Quantity Ordered: " + String.valueOf(current));
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +59,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 context.startActivity(intent);
             }
         });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (current > 1) {
+                    foodPosition.setQuantity(foodPosition.getQuantity() - 1);
+                    FoodDatabase.orderSum -= foodPosition.getCost();
+                }
+                else {
+                    FoodDatabase.removeItem(id);
+                    FoodDatabase.orderSum -= foodPosition.getCost();
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -62,6 +87,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         public TextView name;
         public TextView cost;
         public ImageView itemImageView;
+        public TextView quantity;
+        public Button delete;
 
         public OrderViewHolder(View v) {
             super(v);
@@ -69,6 +96,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             name = v.findViewById(R.id.name);
             cost = v.findViewById(R.id.cost);
             itemImageView = v.findViewById(R.id.image);
+            quantity = v.findViewById(R.id.quantity);
+            delete = v.findViewById(R.id.delete);
         }
     }
 }
