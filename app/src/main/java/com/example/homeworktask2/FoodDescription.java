@@ -56,17 +56,13 @@ public class FoodDescription extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String sQuantity = String.valueOf(quanDrop.getSelectedItem());
                 int quantity = Integer.valueOf(sQuantity);
-
-
                 Food item = new Food(orderId, orderName, orderDesc, orderCost, orderCal, orderPicture, quantity);
                 FoodDatabase.addOrder(orderId, item, quantity);
                 showOrderAdd(nameSlot);
             }
         });
-
 }
     public void addListenerOnSpinnerItemSelection() {
         quanDrop = (Spinner) findViewById(R.id.spinner);

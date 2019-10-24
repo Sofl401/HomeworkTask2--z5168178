@@ -10,8 +10,9 @@ public class FoodDatabase {
     public static HashMap<Integer, Food> orders = new HashMap<>();
     public static double orderSum = 0;
 
-    public static Food getFoodById(int foodID)
-    { return foods.get(foodID);}
+    public static Food getFoodById(int foodID){
+        return foods.get(foodID);}
+
     public static Food getOrderById(int foodID){
         return orders.get(foodID);
     }
@@ -160,6 +161,5 @@ public class FoodDatabase {
                 1462,
                 R.drawable.angus
         ));
-
     }
 }

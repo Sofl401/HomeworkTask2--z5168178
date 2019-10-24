@@ -17,11 +17,10 @@ public class FoodRecyclerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_food_recycler, container, false);
-
         recyclerView = view.findViewById(R.id.foodRv);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-
         FoodAdapter foodAdapter = new FoodAdapter();
 
         foodAdapter.setData(FoodDatabase.getAllFood());

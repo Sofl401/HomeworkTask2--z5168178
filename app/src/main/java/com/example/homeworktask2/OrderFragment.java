@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderFragment extends Fragment {
     private RecyclerView recyclerView;
     private TextView totalSum;
-
 
     public OrderFragment() {
     }
@@ -35,7 +33,7 @@ public class OrderFragment extends Fragment {
 
         totalSum = view.findViewById(R.id.finalCost);
         String total = Double.toString(FoodDatabase.orderSum);
-        totalSum.setText("$" + total);
+        totalSum.setText("Basket Total: $" + total);
 
         Button refresh = view.findViewById(R.id.refresh);
         refresh.setOnClickListener(new View.OnClickListener() {

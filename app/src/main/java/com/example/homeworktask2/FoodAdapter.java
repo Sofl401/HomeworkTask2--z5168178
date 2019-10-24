@@ -19,13 +19,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void setData(ArrayList<Food> foodList){
         this.foodList = foodList;
     }
-
     @NonNull
     @Override
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int ViewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
-
         FoodViewHolder foodViewHolder = new FoodViewHolder(view);
         return foodViewHolder;
     }
@@ -36,14 +33,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
         holder.name.setText(foodPosition.getName());
         String sCost = Double.toString(foodPosition.getCost());
-        holder.cost.setText(sCost);
+        holder.cost.setText("$"+sCost);
         holder.itemImageView.setImageResource(foodPosition.getImageDrawableId());
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 Context context = view.getContext();
-
                 Intent intent = new Intent(context, FoodDescription.class);
                 intent.putExtra("FoodID", foodPosition.getFoodID());
                 context.startActivity(intent);

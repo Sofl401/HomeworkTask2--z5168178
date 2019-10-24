@@ -10,25 +10,17 @@
         android:orientation="horizontal">
 
         <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="start"
-        android:textSize="30sp"
-        android:text="My Basket" />
-
-        <TextView
             android:id="@+id/finalCost"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0"
             android:gravity="center"
             android:text="TextView"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/refresh"
-            android:layout_width="115dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="0.5"
@@ -44,8 +36,6 @@
             android:id="@+id/orderRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
     </LinearLayout>
 
 </LinearLayout>

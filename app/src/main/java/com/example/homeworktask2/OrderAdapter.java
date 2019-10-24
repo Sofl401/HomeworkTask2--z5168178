@@ -9,14 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import static android.view.View.VISIBLE;
-import static com.example.homeworktask2.FoodDatabase.orders;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -40,6 +36,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         final Food foodPosition = orderList.get(position);
         final int id = foodPosition.getFoodID();
+        final String nameHolder = foodPosition.getName();
         final int current = foodPosition.getQuantity();
 
         holder.delete.setVisibility(VISIBLE);
@@ -63,20 +60,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(v.getContext(), "You've removed (1) "+ nameHolder + " from your basket! Refresh to see your updated Basket" , Toast.LENGTH_SHORT).show();
 
                 if (current > 1) {
                     foodPosition.setQuantity(foodPosition.getQuantity() - 1);
-                    FoodDatabase.orderSum -= foodPosition.getCost();
                 }
                 else {
                     FoodDatabase.removeItem(id);
+                }
+                if (FoodDatabase.orderSum > 0) {
                     FoodDatabase.orderSum -= foodPosition.getCost();
                 }
             }
         });
     }
-
-
     @Override
     public int getItemCount() {
         return orderList.size();

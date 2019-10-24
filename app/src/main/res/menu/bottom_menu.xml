@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/viewOrders"
-        android:enabled="true"
-        android:title="View Orders"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/foodPage"
         android:enabled="true"
         android:title="Order Food"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/viewOrders"
+        android:enabled="true"
+        android:title="View Basket"
         app:showAsAction="ifRoom" />
 
 </menu>
